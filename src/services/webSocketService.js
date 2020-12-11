@@ -39,7 +39,7 @@ webSocketsService.install = function (Vue, options) {
             }
         }
 
-        ws.onerror = (error) => {
+        ws.onerror = () => {
             ws.close()
         }
     }

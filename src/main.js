@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(webSocketService, {
   store,
-  url: process.env.VUE_APP_DEV_URL
+  url: process.env.VUE_APP_URL
 })
 
 new Vue({
