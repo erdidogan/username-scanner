@@ -40,7 +40,6 @@ webSocketsService.install = function (Vue, options) {
         }
 
         ws.onerror = (error) => {
-            console.log(error)
             ws.close()
         }
     }
@@ -71,7 +70,6 @@ webSocketsService.install = function (Vue, options) {
       Here we write our custom functions to not make a mess in one function
     */
     function handleNotification (params) {
-        console.log(params)
         options.store.dispatch('sites/setSites', JSON.parse(params.data))
     }
 }

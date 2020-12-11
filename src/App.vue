@@ -8,7 +8,7 @@
               Username Radar
             </p>
             <p class="subtitle">
-              Check available usernames for popular social platforms
+              Check available usernames for popular web sites
             </p>
           </div>
         </div>

@@ -3,13 +3,13 @@
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="field is-grouped is-grouped-centered">
-          <div class="control is-expanded ">
+          <div class="control is-expanded">
             <label class="label">Username</label>
             <input v-model="username"
                    class="input is-rounded"
                    placeholder="Type a username"
                    type="text">
-            <p class="help">Type a username and press return button</p>
+            <p class="help">Type a username and click submit button</p>
           </div>
         </div>
         <div class="field is-grouped">
@@ -43,6 +43,7 @@ export default {
 
     clear() {
       this.valid = false;
+      this.username = ''
       this.$webSocketsDisconnect()
     },
 
