@@ -13,7 +13,6 @@ Green color indicates that given username is available, yellow color indicates t
 * 20 Popular Web Sites
 * Coloured Results
 
-
 ## Tech Stack
 
 * Java 11 - Spring Boot API
@@ -21,9 +20,6 @@ Green color indicates that given username is available, yellow color indicates t
 * Vue
 * Vuex
 * Buefy UI Components
-
-
-
 
 ## Author
 

@@ -2,9 +2,9 @@
   <section class="hero ">
     <div class="hero-body">
       <div class="columns is-variable bd-klmn-columns is-4 is-multiline">
-        <div v-for="(data,index) in results" v-bind:key="index" class="column is-3" >
+        <div v-for="(data,index) in results" v-bind:key="index" class="column is-3"  v-show="data.isAvailable!== null">
           <a :href="data.registerUrl" style="text-decoration:none;" target="_blank">
-            <div class="notification" :class="{'is-success': data.statusCode === 0, 'is-warning': data.statusCode === 1, 'is-danger': data.statusCode === '2'}"
+            <div class="notification" :class="{'is-success': data.isAvailable === true , 'is-warning': data.isAvailable === false,}"
             >
               <div class="media">
                 <div class="media-left">

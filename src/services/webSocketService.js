@@ -4,12 +4,6 @@ webSocketsService.install = function (Vue, options) {
     let ws = new WebSocket(options.url)
     let reconnectInterval = options.reconnectInterval || 1000
 
-    ws.onmessage = (event) => {
-        // New message from the backend - use JSON.parse(event.data)
-
-        handleNotification(event)
-    }
-
     Vue.prototype.$webSocketsConnect = () => {
         ws = new WebSocket(options.url)
 

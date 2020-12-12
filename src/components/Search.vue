@@ -1,25 +1,18 @@
 <template>
-  <div class="hero is-light">
+  <div class="hero is-small is-light">
     <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="field is-grouped is-grouped-centered">
-          <div class="control is-expanded">
-            <label class="label">Username</label>
-            <input v-model="username"
-                   class="input is-rounded"
-                   placeholder="Type a username"
-                   type="text">
-            <p class="help">Type a username and click submit button</p>
-          </div>
-        </div>
-        <div class="field is-grouped">
-          <div class="control">
+      <div class="container is-max-desktop" v-show="!isOpsStarted">
+        <b-field label="Username" grouped message="Type a username and press submit button" >
+          <b-input  v-model="username" expanded
+                    placeholder="Type a username"
+                    type="text"></b-input>
+          <p class="control">
             <button class="button is-dark" :disabled="valid" @click="enterClicked">Submit</button>
-          </div>
-          <div class="control">
-            <button class="button is-danger is-light" @click="clear">Cancel</button>
-          </div>
-        </div>
+          </p>
+        </b-field>
+      </div>
+      <div class="container has-text-centered" v-show="isOpsStarted">
+          <button class="button is-dark" @click="clear">Start New Search</button>
       </div>
     </div>
   </div>
@@ -31,27 +24,30 @@ export default {
   data() {
     return {
       username: '',
-      valid: false,
+      valid: true,
+      isOpsStarted: false
     };
+  },
+  created() {
+    this.$webSocketsConnect()
   },
   methods: {
     enterClicked() {
-      this.valid = true;
       this.$webSocketsSend(this.username.replace(/[^a-zA-Z0-9-_.]/g, ''));
-      setTimeout(()=>{ this.valid = false; }, 12000);
+      this.isOpsStarted=true
     },
 
     clear() {
-      this.valid = false;
       this.username = ''
       this.$webSocketsDisconnect()
+      this.isOpsStarted = false;
     },
-
-
   },
   watch: {
     username: function (val) {
       this.username = val.replace(/[^a-zA-Z0-9-_.]/g, '');
+      this.valid = val.length < 4;
+
     },
   },
 }
