@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(webSocketService, {
   store,
-  url: 'wss://username-scan-api.herokuapp.com/event'
+  url: 'wss://uname-api.herokuapp.com/event'
 })
 
 new Vue({
