@@ -61,7 +61,7 @@ export default {
         const loadingComponent = this.$buefy.loading.open({
           container: this.$refs.element
         })
-        setTimeout(() => loadingComponent.close(), 3 * 1000)
+        setTimeout(() => loadingComponent.close(),  2500)
     },
 
     clear() {

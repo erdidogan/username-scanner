@@ -40,10 +40,6 @@ webSocketsService.install = function (Vue, options) {
         }
     }
 
-    Vue.prototype.$webSocketsDisconnect = () => {
-        ws.close()
-    }
-
     Vue.prototype.$webSocketsSend = (data) => {
         options.store.dispatch('sites/clearSites', [])
         if (ws.readyState !== ws.OPEN) {

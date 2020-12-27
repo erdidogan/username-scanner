@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <section class="hero is-small is-black is-bold">
+    <section class="hero is-primary is-bold">
       <div class="hero-body">
         <div class="container">
           <div class="container has-text-centered">
