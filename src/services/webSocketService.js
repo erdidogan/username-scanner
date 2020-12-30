@@ -1,21 +1,19 @@
 let webSocketsService = {}
-import { LoadingProgrammatic as Loading } from 'buefy'
+import {LoadingProgrammatic as Loading} from 'buefy'
 
 webSocketsService.install = function (Vue, options) {
     let ws = new WebSocket(options.url)
-    let reconnectInterval =  1000
+    let reconnectInterval = 1000
     const loadingComponent = Loading.open({})
     Vue.prototype.$webSocketsConnect = () => {
         ws = new WebSocket(options.url)
 
         ws.onopen = () => {
-            // Restart reconnect interval
             loadingComponent.close()
             reconnectInterval = 1000
         }
 
         ws.onmessage = (event) => {
-            // New message from the backend - use JSON.parse(event.data)
             handleNotification(event)
         }
 
@@ -26,7 +24,6 @@ webSocketsService.install = function (Vue, options) {
                     let maxReconnectInterval = 3000
                     setTimeout(() => {
                         if (reconnectInterval < maxReconnectInterval) {
-                            // Reconnect interval can't be > x seconds
                             reconnectInterval += 1000
                         }
                         Vue.prototype.$webSocketsConnect()
@@ -45,7 +42,7 @@ webSocketsService.install = function (Vue, options) {
         if (ws.readyState !== ws.OPEN) {
             console.log("RECONNECTING")
             Vue.prototype.$webSocketsConnect()
-        }else{
+        } else {
             ws.send(data)
         }
 

@@ -1,8 +1,7 @@
 <template>
-<section>
-  <section class="hero is-small is-light">
+  <section class="hero is-small is-light"  ref="element">
     <div class="hero-body">
-      <div class="container is-max-desktop">
+      <div class="container is-max-desktop" >
         <b-field label="Username" grouped>
           <b-input  v-model="username" expanded
                     placeholder="Type a username"
@@ -17,30 +16,6 @@
       </div>
     </div>
   </section>
-  <section class="hero" >
-    <div class="hero-body" >
-      <div class="container is-max-desktop" ref="element">
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-128x128">
-              <img src="https://www.flaticon.com/svg/static/icons/svg/1076/1076336.svg" alt="A Flaticon Icon">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Username Radar</strong> by <a href="https://erdidogan.com"><small>@erdidogan</small></a>
-                <br>
-                Username radar checks 20 popular websites and tells you that a given username is available or taken on that site.
-                Type a username and hit submit button to view results.
-              </p>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-</section>
 </template>
 <script>
 
@@ -61,7 +36,7 @@ export default {
         const loadingComponent = this.$buefy.loading.open({
           container: this.$refs.element
         })
-        setTimeout(() => loadingComponent.close(),  2500)
+        setTimeout(() => loadingComponent.close(),  2100)
     },
 
     clear() {
