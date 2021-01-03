@@ -4,7 +4,7 @@
       <div v-show="results.length !== 0" class="container is-max-desktop">
         <div class="columns is-multiline">
           <div class="column is-12">
-            <nav class="level notification is-light">
+            <nav class="level notification ">
               <!-- Left side -->
               <div class="level-left">
                 <div class="level-item">
