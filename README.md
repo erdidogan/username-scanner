@@ -1,29 +1,31 @@
 # Username - Scanner
 
-Username - Scanner searches popular web sites to find out that username is available or not. 
-Green color indicates that given username is available, yellow color indicates that username is taken.
-
-Backend: https://github.com/erdidogan/username-scanner-api
-
-
-
-![Image](./src/assets/1.png "HomePage")
+Username - Scanner searches popular web sites to find out given username is available or not. 
+Green color means username is available, yellow color means username is taken.
 
 ## Feauteres
 
 * Elegant, Simple UI
 * Responsive Design
 * Fast Search
-* 20 Popular Web Sites
+* Popular Web Sites
 * Coloured Results
+* Fast Search
+* Accurate Results
 
 ## Tech Stack
 
-* Java 11 - Spring Boot API
-* Web Socket Connection
+----> Backend
+* Java 11 - Spring Boot REST API
+* Java 11 - HTTP Client
+* Concurrent Call Mechanism
+* Docker
+
+----> Frontend
 * Vue
-* Vuex
 * Buefy UI Components
+* Axios
+* Vuex
 
 ## Author
 

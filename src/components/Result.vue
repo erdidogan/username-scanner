@@ -8,8 +8,8 @@
               <!-- Left side -->
               <div class="level-left">
                 <div class="level-item">
-                  <p class="subtitle is-5">
-                    Result: <strong>{{ results.length }}</strong> sites
+                  <p class="subtitle is-5" v-if="results[0]">
+                    Result: <strong>{{ results[0].length }}</strong> sites
                   </p>
                 </div>
               </div>
@@ -29,11 +29,10 @@
                 </div>
               </div>
             </nav>
-
           </div>
-          <div v-for="(data,index) in results" v-bind:key="index" class="column is-3">
+          <div v-for="(data,index) in results[0]" v-bind:key="index" class="column is-3">
             <a :href="data.registerUrl" style="text-decoration:none;" target="_blank">
-              <div :class="{'is-success': data.statusCode === 404 , 'is-warning': data.statusCode === 200,}"
+              <div :class="{'is-success': data.statusCode === 404 , 'is-warning': data.statusCode === 200}"
                    class="tile notification">
                 <article class="media">
                   <figure class="media-left">
@@ -44,8 +43,7 @@
                   <div class="media-content">
                     <div class="content">
                       <p>
-                        <strong v-if="data.siteName === 'Buy Me A Coffee' ">BuyMeACoffee</strong>
-                        <strong v-else>{{ data.siteName }}</strong>
+                        <strong>{{ data.siteName }}</strong>
                       </p>
                     </div>
                   </div>
@@ -61,32 +59,9 @@
 <script>
 export default {
   name: "Result",
-  data() {
-    return {
-      sort: 0,
-    };
-  },
-  methods: {
-    listAll() {
-      this.sort = 0;
-    },
-    listAvailable() {
-      this.sort = 1;
-    },
-    listTaken() {
-      this.sort = 2;
-
-    }
-  },
   computed: {
     results() {
-      if (this.sort === 1) {
-        return this.$store.getters['sites/getSites'].filter(item => String(item.statusCode).includes("404"));
-      } else if (this.sort === 2) {
-        return this.$store.getters['sites/getSites'].filter(item => String(item.statusCode).includes("200"));
-      } else {
-        return this.$store.getters['sites/getSites']
-      }
+      return this.$store.getters['sites/getSites']
     },
   },
 

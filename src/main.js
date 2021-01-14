@@ -1,22 +1,20 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
-import webSocketService from './services/webSocketService'
-
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
-
-Vue.config.productionTip = false;
-Vue.use(Buefy);
+import store from './store'
+import apiService from './services/api'
 
 Vue.config.productionTip = false
+Vue.use(Buefy);
 
-Vue.use(webSocketService, {
-  store,
-  url: 'wss://uname-api.herokuapp.com/event'
+Vue.use(apiService, {
+    store,
+    baseURL: 'https://uname-api.herokuapp.com'
 })
 
 new Vue({
-  store,
-  render: h => h(App)
+    store,
+    render: h => h(App)
 }).$mount('#app')
+

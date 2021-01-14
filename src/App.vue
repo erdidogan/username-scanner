@@ -14,7 +14,7 @@
                 <p>
                   <strong>Username Radar</strong> by <a href="https://erdidogan.com"><small>@erdidogan</small></a>
                   <br>
-                  Username radar checks 20 popular websites and tells you that a given username is available or taken on
+                  Username radar checks popular websites and tells you that a given username is available or taken on
                   that site.
                   Type a username and hit submit button to view results.
                 </p>
