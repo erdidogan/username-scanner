@@ -5,7 +5,7 @@ matrix:
       install:
         - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       before_script:
-        - cd $TRAVIS_BUILD_DIR/backend
+        - cd backend
       script:
         - mvn clean install -B
         - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=erdidogan_username-scanner
