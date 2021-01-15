@@ -1,3 +1,5 @@
+[![GitHub](https://img.shields.io/github/license/erdidogan/username-scanner?color=orange)](https://github.com/erdidogan/username-scanner/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/paulschwarz/spring-dotenv?color=yellowgreen)](https://github.com/erdidogan/username-scanner/stargazers)
 # Username - Scanner
 
 Username - Scanner searches popular web sites to find out given username is available or not. 

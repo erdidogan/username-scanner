@@ -1,0 +1,20 @@
+matrix:
+  include:
+    - language: java
+      jdk: oraclejdk11
+      install:
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      script:
+        - mvn clean install -B
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=erdidogan_username-scanner
+      jobs:
+        fast_finish: true
+      addons:
+        sonarcloud:
+          organization: erdidogan
+          token: $SONAR_TOKEN
+    - language: node.js
+      node_js: "12.0"
+      cache: npm
+      script:
+        - npm run build
