@@ -33,7 +33,6 @@ export default {
       this.$apiCall("/find?username=" + this.username.replace(/[^a-zA-Z0-9-_.]/g, ''));
     },
     clear() {
-      this.username = ''
       return this.$store.dispatch('sites/clearSites', [])
     },
   },

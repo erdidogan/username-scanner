@@ -25,7 +25,7 @@ public class SiteService {
 
     private final List<Source> getSourceList;
     private final List<Source> postSourceList;
-    private final String TARGET = "{}";
+    private static final String TARGET = "{}";
     private final SiteUtil siteUtil;
 
 
@@ -40,7 +40,7 @@ public class SiteService {
 
         siteUtil = new SiteUtil();
 
-        if (postSourceList.size() > 0 || getSourceList.size() > 0)
+        if (!postSourceList.isEmpty() || !getSourceList.isEmpty())
             log.info("Init Source List");
         else
             log.error("Can not find or read file!");
@@ -54,6 +54,7 @@ public class SiteService {
             resultList.addAll(findForGetSources(username));
             log.info("Success");
         } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            Thread.currentThread().interrupt();
             log.error("Execution Error! " + e.getMessage());
         }
         return resultList;
@@ -105,6 +106,8 @@ public class SiteService {
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
                     break;
+                default:
+                    log.debug("Default Case Executed");
             }
             resultList.add(new SiteResponseModel(s.getSiteName(), statusCode,
                     s.getSiteRegisterUrl().replace(TARGET, username), s.getSiteIconUrl()));
