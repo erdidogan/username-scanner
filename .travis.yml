@@ -8,8 +8,3 @@ matrix:
         - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
       script:
         - mvn clean install -B
-        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=erdidogan_username-scanner
-      addons:
-        sonarcloud:
-          organization: erdidogan
-          token: $SONAR_TOKEN

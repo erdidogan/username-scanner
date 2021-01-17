@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     enterClicked() {
-
       this.$apiCall("/find?username=" + this.username.replace(/[^a-zA-Z0-9-_.]/g, ''));
     },
     clear() {

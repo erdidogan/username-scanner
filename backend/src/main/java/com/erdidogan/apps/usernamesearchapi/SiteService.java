@@ -63,7 +63,7 @@ public class SiteService {
     private List<SiteResponseModel> findForGetSources(String username) throws ExecutionException, InterruptedException, TimeoutException {
         List<SiteResponseModel> resultList = new ArrayList<>();
         List<String> uriList = getSourceList.stream().map(url -> url.getSiteUrl().replace(TARGET, username)).collect(Collectors.toList());
-        List<CompletableFuture<HttpResponse<String>>> callResultList = siteUtil.concurrentCallForGetSource(uriList).get(1, TimeUnit.MINUTES);
+        List<CompletableFuture<HttpResponse<String>>> callResultList = siteUtil.concurrentCallForGetSource(uriList).get();
         for (int i = 0; i < getSourceList.size(); i++) {
             Source s = getSourceList.get(i);
             if (s.getMessage() == null) {
@@ -89,7 +89,7 @@ public class SiteService {
             switch (s.getSiteName()) {
                 case "Instagram":
                     response = siteUtil.asyncCallForPostSource(s.getSiteUrl(),
-                            HttpRequest.BodyPublishers.ofString("username=" + username), "application/x-www-form-urlencoded").get(1, TimeUnit.MINUTES);
+                            HttpRequest.BodyPublishers.ofString("username=" + username), "application/x-www-form-urlencoded").get();
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
                     break;
