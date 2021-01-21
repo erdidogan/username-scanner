@@ -20,8 +20,22 @@ api.install = function (Vue, options) {
         });
     }
 
+    Vue.prototype.$apiCallForPost = (url) => {
+        axios.get(baseURL + '/api' + url)
+            .then(function (response) {
+                handleResponseForPost(response)
+            })
+            .catch(function (error) {
+                Snackbar.open('Data Fetch Error!  ' + error)
+            });
+    }
+
     function handleResponse(response) {
         options.store.dispatch('sites/setSites', response.data)
+    }
+
+    function handleResponseForPost(response) {
+        options.store.dispatch('sites/setSitesForPost', response.data)
     }
 
     function clearSites() {

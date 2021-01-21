@@ -1,7 +1,6 @@
 package com.erdidogan.apps.usernamesearchapi;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -18,8 +17,8 @@ public class SiteUtil {
 
     private static final String USER_AGENT = "Mozilla/5.0 Firefox/26.0";
 
-    @Async
-    public CompletableFuture<List<CompletableFuture<HttpResponse<String>>>> concurrentCallForGetSource(List<String> uriList) {
+
+    public static CompletableFuture<List<CompletableFuture<HttpResponse<String>>>> concurrentCallForGetSource(List<String> uriList) {
 
         HttpClient httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
@@ -38,8 +37,8 @@ public class SiteUtil {
                 .collect(Collectors.toList()));
     }
 
-    @Async
-    public CompletableFuture<HttpResponse<String>> asyncCallForPostSource(String url, HttpRequest.BodyPublisher bodyPublisher, String contentType) {
+
+    public static CompletableFuture<HttpResponse<String>> asyncCallForPostSource(String url, HttpRequest.BodyPublisher bodyPublisher, String contentType) {
 
         HttpClient httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NEVER)

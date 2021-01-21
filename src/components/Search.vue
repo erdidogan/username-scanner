@@ -29,7 +29,9 @@ export default {
   },
   methods: {
     enterClicked() {
-      this.$apiCall("/find?username=" + this.username.replace(/[^a-zA-Z0-9-_.]/g, ''));
+      let userName =  this.username.replace(/[^a-zA-Z0-9-_.]/g, '');
+      this.$apiCall("/find/get?username=" + userName);
+      this.$apiCallForPost("/find/post?username=" + userName);
     },
     clear() {
       return this.$store.dispatch('sites/clearSites', [])

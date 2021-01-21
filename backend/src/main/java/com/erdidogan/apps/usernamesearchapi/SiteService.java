@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.http.HttpRequest;
@@ -14,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -26,7 +26,6 @@ public class SiteService {
     private final List<Source> getSourceList;
     private final List<Source> postSourceList;
     private static final String TARGET = "{}";
-    private final SiteUtil siteUtil;
 
 
     public SiteService() {
@@ -38,7 +37,6 @@ public class SiteService {
         Source[] postSources = new Gson().fromJson(new BufferedReader(new InputStreamReader(inputStreamForPost)), Source[].class);
         postSourceList = Arrays.asList(postSources);
 
-        siteUtil = new SiteUtil();
 
         if (!postSourceList.isEmpty() || !getSourceList.isEmpty())
             log.info("Init Source List");
@@ -47,13 +45,24 @@ public class SiteService {
     }
 
 
-    public List<SiteResponseModel> findAll(String username) {
+    public List<SiteResponseModel> returnGetResult(String username) {
+        List<SiteResponseModel> resultList = new ArrayList<>();
+        try {
+            resultList = findForGetSources(username);
+            log.info("Success");
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            Thread.currentThread().interrupt();
+            log.error("Execution Error! " + e.getMessage());
+        }
+        return resultList;
+    }
+
+    public List<SiteResponseModel> returnPostResult(String username) {
         List<SiteResponseModel> resultList = new ArrayList<>();
         try {
             resultList = findForPostSources(username);
-            resultList.addAll(findForGetSources(username));
             log.info("Success");
-        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+        } catch (InterruptedException | IOException | ExecutionException e) {
             Thread.currentThread().interrupt();
             log.error("Execution Error! " + e.getMessage());
         }
@@ -63,7 +72,7 @@ public class SiteService {
     private List<SiteResponseModel> findForGetSources(String username) throws ExecutionException, InterruptedException, TimeoutException {
         List<SiteResponseModel> resultList = new ArrayList<>();
         List<String> uriList = getSourceList.stream().map(url -> url.getSiteUrl().replace(TARGET, username)).collect(Collectors.toList());
-        List<CompletableFuture<HttpResponse<String>>> callResultList = siteUtil.concurrentCallForGetSource(uriList).get();
+        List<CompletableFuture<HttpResponse<String>>> callResultList = SiteUtil.concurrentCallForGetSource(uriList).get();
         for (int i = 0; i < getSourceList.size(); i++) {
             Source s = getSourceList.get(i);
             if (s.getMessage() == null) {
@@ -81,28 +90,28 @@ public class SiteService {
     }
 
 
-    private List<SiteResponseModel> findForPostSources(String username) throws ExecutionException, InterruptedException, TimeoutException {
+    private List<SiteResponseModel> findForPostSources(String username) throws InterruptedException, IOException, ExecutionException {
         List<SiteResponseModel> resultList = new ArrayList<>();
         HttpResponse<String> response;
         int statusCode = 200;
         for (Source s : postSourceList) {
             switch (s.getSiteName()) {
                 case "Instagram":
-                    response = siteUtil.asyncCallForPostSource(s.getSiteUrl(),
+                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl(),
                             HttpRequest.BodyPublishers.ofString("username=" + username), "application/x-www-form-urlencoded").get();
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
                     break;
                 case "Snapchat":
-                    response = siteUtil.asyncCallForPostSource(s.getSiteUrl().replace("{}", username),
-                            HttpRequest.BodyPublishers.noBody(), "application/json").get(1, TimeUnit.MINUTES);
+                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl().replace("{}", username),
+                            HttpRequest.BodyPublishers.noBody(), "application/json").get();
                     if (response.body().contains(s.getMessage()))
                         statusCode = 404;
                     break;
                 case "Twitch":
                     String body = "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}";
-                    response = siteUtil.asyncCallForPostSource(s.getSiteUrl(),
-                            HttpRequest.BodyPublishers.ofString(body.replace("####", username)), "application/json").get(1, TimeUnit.MINUTES);
+                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl(),
+                            HttpRequest.BodyPublishers.ofString(body.replace("####", username)), "application/json").get();
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
                     break;

@@ -15,15 +15,27 @@ public class SiteController {
 
     private final SiteService siteService;
 
-    @GetMapping("find")
-    public ResponseEntity<List<SiteResponseModel>> search(@RequestParam String username) {
+    @GetMapping("find/get")
+    public ResponseEntity<List<SiteResponseModel>> searchForGet(@RequestParam String username) {
         username = username.replaceAll("[^a-zA-Z0-9-_.]/g", "");
         if (username.length() >= 4) {
-            return ResponseEntity.ok().body(siteService.findAll(username));
+            return ResponseEntity.ok().body(siteService.returnGetResult(username));
         } else {
             return ResponseEntity.badRequest().body(new ArrayList<>());
         }
 
     }
+
+    @GetMapping("find/post")
+    public ResponseEntity<List<SiteResponseModel>> searchForPost(@RequestParam String username) {
+        username = username.replaceAll("[^a-zA-Z0-9-_.]/g", "");
+        if (username.length() >= 4) {
+            return ResponseEntity.ok().body(siteService.returnPostResult(username));
+        } else {
+            return ResponseEntity.badRequest().body(new ArrayList<>());
+        }
+
+    }
+
 
 }
