@@ -13,7 +13,6 @@ Green color means username is available, yellow color means username is taken.
 * Fast Search
 * Popular Web Sites
 * Coloured Results
-* Fast Search
 * Accurate Results
 
 ## Tech Stack
@@ -44,6 +43,10 @@ Green color means username is available, yellow color means username is taken.
 ## Author
 
 [Erdi Doğan](https://www.linkedin.com/in/doganerdi)
+
+
+## Contributions
+This project is open to contributions, to get started create a first starting issue. 
 
 
 ## License
