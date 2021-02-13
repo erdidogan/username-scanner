@@ -71,8 +71,9 @@ public class SiteService {
 
     private List<SiteResponseModel> findForGetSources(String username) throws ExecutionException, InterruptedException, TimeoutException {
         List<SiteResponseModel> resultList = new ArrayList<>();
+        HttpClientUtil httpClientUtil = new HttpClientUtil();
         List<String> uriList = getSourceList.stream().map(url -> url.getSiteUrl().replace(TARGET, username)).collect(Collectors.toList());
-        List<CompletableFuture<HttpResponse<String>>> callResultList = SiteUtil.concurrentCallForGetSource(uriList).get();
+        List<CompletableFuture<HttpResponse<String>>> callResultList = httpClientUtil.concurrentCallForGetSource(uriList).get();
         for (int i = 0; i < getSourceList.size(); i++) {
             Source s = getSourceList.get(i);
             if (s.getMessage() == null) {
@@ -93,24 +94,25 @@ public class SiteService {
     private List<SiteResponseModel> findForPostSources(String username) throws InterruptedException, IOException, ExecutionException {
         List<SiteResponseModel> resultList = new ArrayList<>();
         HttpResponse<String> response;
+        HttpClientUtil httpClientUtil = new HttpClientUtil();
         int statusCode = 200;
         for (Source s : postSourceList) {
             switch (s.getSiteName()) {
                 case "Instagram":
-                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl(),
+                    response = httpClientUtil.asyncCallForPostSource(s.getSiteUrl(),
                             HttpRequest.BodyPublishers.ofString("username=" + username), "application/x-www-form-urlencoded").get();
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
                     break;
                 case "Snapchat":
-                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl().replace("{}", username),
+                    response = httpClientUtil.asyncCallForPostSource(s.getSiteUrl().replace("{}", username),
                             HttpRequest.BodyPublishers.noBody(), "application/json").get();
                     if (response.body().contains(s.getMessage()))
                         statusCode = 404;
                     break;
                 case "Twitch":
                     String body = "{\"operationName\":\"UsernameValidator_User\",\"variables\":{\"username\":\"####\"},\"extensions\":{\"persistedQuery\":{\"version\":1,\"sha256Hash\":\"fd1085cf8350e309b725cf8ca91cd90cac03909a3edeeedbd0872ac912f3d660\"}}}";
-                    response = SiteUtil.asyncCallForPostSource(s.getSiteUrl(),
+                    response = httpClientUtil.asyncCallForPostSource(s.getSiteUrl(),
                             HttpRequest.BodyPublishers.ofString(body.replace("####", username)), "application/json").get();
                     if (!response.body().contains(s.getErrorMessage()))
                         statusCode = 404;
@@ -120,6 +122,7 @@ public class SiteService {
             }
             resultList.add(new SiteResponseModel(s.getSiteName(), statusCode,
                     s.getSiteRegisterUrl().replace(TARGET, username), s.getSiteIconUrl()));
+
         }
         log.info("Async Post Completed");
         return resultList;

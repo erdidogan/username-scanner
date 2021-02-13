@@ -1,6 +1,7 @@
 package com.erdidogan.apps.usernamesearchapi;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -12,19 +13,26 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-@Component
-public class SiteUtil {
+
+public class HttpClientUtil {
 
     private static final String USER_AGENT = "Mozilla/5.0 Firefox/26.0";
 
+    private final HttpClient httpClient;
 
-    public static CompletableFuture<List<CompletableFuture<HttpResponse<String>>>> concurrentCallForGetSource(List<String> uriList) {
+    public HttpClientUtil() {
 
-        HttpClient httpClient = HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.NORMAL)
+        this.httpClient = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.NEVER)
                 .version(HttpClient.Version.HTTP_2)
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
+
+
+    }
+
+    @Async
+    CompletableFuture<List<CompletableFuture<HttpResponse<String>>>> concurrentCallForGetSource(List<String> uriList) {
 
         return CompletableFuture.completedFuture(uriList.stream()
                 .map(url -> httpClient.sendAsync(
@@ -37,14 +45,9 @@ public class SiteUtil {
                 .collect(Collectors.toList()));
     }
 
+    @Async
+    CompletableFuture<HttpResponse<String>> asyncCallForPostSource(String url, HttpRequest.BodyPublisher bodyPublisher, String contentType) {
 
-    public static CompletableFuture<HttpResponse<String>> asyncCallForPostSource(String url, HttpRequest.BodyPublisher bodyPublisher, String contentType) {
-
-        HttpClient httpClient = HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.NEVER)
-                .version(HttpClient.Version.HTTP_2)
-                .connectTimeout(Duration.ofSeconds(10))
-                .build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
