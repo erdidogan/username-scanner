@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/erdidogan/username-scanner.svg?branch=master)](https://travis-ci.com/erdidogan/username-scanner)
 [![GitHub](https://img.shields.io/github/license/erdidogan/username-scanner?color=orange)](https://github.com/erdidogan/username-scanner/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/erdidogan/username-scanner?color=yellowgreen)](https://github.com/erdidogan/username-scanner/stargazers)
 # Username - Scanner

@@ -1,45 +1,42 @@
 {
-  "name": "uname",
-  "version": "0.1.0",
-  "private": true,
+  "name": "uname-radar",
+  "version": "1.0.0",
+  "description": "Fast & Accurate Username Discovery",
+  "author": {
+    "name": "Erdi Dogan"
+  },
+  "license": "MIT",
+  "keywords": [
+    "username search",
+    "username",
+    "username scanner",
+    "username discovery",
+    "tailwind",
+    "vite",
+    "vue",
+    "vuex",
+    "spa",
+    "vercel",
+    "uname",
+    "uname radar",
+    "uname search"
+  ],
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "buefy": "^0.9.4",
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vuex": "^3.6.0"
+    "vue": "^3.0.5",
+    "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@vitejs/plugin-vue": "^1.1.4",
+    "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.6",
+    "tailwindcss": "^2.0.3",
+    "vite": "^2.0.1"
+  }
 }
