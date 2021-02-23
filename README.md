@@ -26,7 +26,8 @@ Green color means username is available, yellow color means username is taken.
 
 ----> Frontend
 * Vue
-* Buefy UI Components
+* Vite
+* Tailwind - CSS
 * Axios
 * Vuex
 
