@@ -1,30 +1,20 @@
-[![GitHub](https://img.shields.io/github/license/erdidogan/username-scanner?color=orange)](https://github.com/erdidogan/username-scanner/blob/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/erdidogan/username-scanner?color=yellowgreen)](https://github.com/erdidogan/username-scanner/stargazers)
 # Username - Scanner
 
 Username - Scanner searches popular web sites to find out given username is available or not. 
-Green color means username is available, yellow color means username is taken.
+
+This repo contains only front-end part. Please checkout [core logic](https://github.com/erdidogan/username-scanner-core).
 
 ## Feauteres
 
 * Elegant, Simple UI
 * Responsive Design
+* Tailwind CSS Components
 * Fast Search
 * Popular Web Sites
 * Coloured Results
 * Accurate Results
 
-## Tech Stack
-
-----> Backend
-* Maven
-* Docker
-* Java 11 - Spring Boot REST API
-* Java 11 - HTTP Client
-* Concurrency
-
-
-----> Frontend
+## Tech
 * Vue
 * Vite
 * Tailwind - CSS
@@ -32,13 +22,7 @@ Green color means username is available, yellow color means username is taken.
 * Vuex
 
 ## Deployment
-
-----> Backend
-* Heroku Container Registry
-* Heroku Docker Deployment
-
-----> Frontend
-* Vercel
+* This application is deployed on Vercel.
 
 ## Author
 

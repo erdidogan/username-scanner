@@ -2,7 +2,7 @@ import {createStore} from "vuex";
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "https://uname-api.herokuapp.com/api",
+	baseURL: "https://username-scanner-core.herokuapp.com/api",
 });
 
 export default createStore({
@@ -20,7 +20,7 @@ export default createStore({
 	actions: {
 		fetchItems(context, name) {
 			context.commit("clearItems");
-			api.get(`find/get?username=`+name)
+			api.get(`find/all?username=`+name)
 				.then((res) => {
 					context.commit("loadItems", res.data);
 				})
