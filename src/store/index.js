@@ -2,7 +2,7 @@ import {createStore} from "vuex";
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "https://username-scanner-core.herokuapp.com/api",
+	baseURL: "localhost:8080/api",
 });
 
 export default createStore({
