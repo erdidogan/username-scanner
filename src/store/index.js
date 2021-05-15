@@ -2,7 +2,7 @@ import {createStore} from "vuex";
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "localhost:8080/api",
+	baseURL: "http://127.0.0.1:8383/api/v1",
 });
 
 export default createStore({
@@ -22,7 +22,7 @@ export default createStore({
 			context.commit("clearItems");
 			api.get(`find/all?username=`+name)
 				.then((res) => {
-					context.commit("loadItems", res.data);
+					context.commit("loadItems", res.data.list);
 				})
 				.catch((error) => {
 					console.error(error);

@@ -28,15 +28,15 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "vue": "^3.0.9",
+    "vue": "^3.0.11",
     "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.0",
-    "@vue/compiler-sfc": "^3.0.9",
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.8",
-    "tailwindcss": "^2.0.4",
-    "vite": "^2.1.4"
+    "postcss": "^8.2.15",
+    "tailwindcss": "^2.1.2",
+    "vite": "^2.3.2"
   }
 }

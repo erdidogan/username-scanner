@@ -2,7 +2,7 @@
   <section>
     <div class="max-w-3xl px-6 py-16 mx-auto text-center">
       <h1 class="text-3xl font-semibold text-gray-800 dark:text-gray-100">
-        Want to see it in action?
+        Username Scanner
       </h1>
       <p class="max-w-md mx-auto mt-5 text-gray-500 dark:text-gray-400">
         Type a username and click <strong>Submit</strong> button
