@@ -3,7 +3,7 @@
 
 Username - Scanner searches popular web sites to find out given username is available or not. 
 
-This repo contains only front-end part. Please checkout [core logic](https://github.com/erdidogan/username-scanner-core).
+This repo contains only front-end part. Please checkout [core logic](https://github.com/erdidogan/username-scanner-core-reactive).
 
 ## Feauteres
 
