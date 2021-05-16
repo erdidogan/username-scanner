@@ -22,9 +22,6 @@ This repo contains only front-end part. Please checkout [core logic](https://git
 * Axios
 * Vuex
 
-## Deployment
-* This application is deployed on Vercel.
-
 ## Author
 
 [Erdi Doğan](https://www.linkedin.com/in/doganerdi)
