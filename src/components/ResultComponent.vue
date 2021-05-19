@@ -30,8 +30,11 @@ transition duration-400 ease-in-out transform hover:-translate-y-1">
           <p class="text-gray-800 text-md text-center dark:text-white font-bold my-4">
             {{ data.siteName }}
           </p>
-          <p class="text-md  text-center text-gray-800-700 ml-2">
-            {{ data.status }}
+          <p class="text-md  text-center text-gray-800-700 ml-2" v-show="data.status === 200">
+            Taken
+          </p>
+          <p class="text-md  text-center text-gray-800-700 ml-2" v-show="data.status === 404">
+            Available
           </p>
         </a>
       </div>
