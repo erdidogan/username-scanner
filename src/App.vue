@@ -4,6 +4,5 @@
 
 <script setup>
 import SearchForm from './components/SearchForm.vue'
-
 </script>
 

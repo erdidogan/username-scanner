@@ -2,7 +2,7 @@ import {createStore} from "vuex";
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "http://127.0.0.1:8383/api/v1",
+	baseURL: "https://username-scanner-core-reactive-43dd7.ondigitalocean.app",
 });
 
 export default createStore({
@@ -13,14 +13,14 @@ export default createStore({
 		loadItems(state, item) {
 			state.items.push(item);
 		},
-		clearItems(state, item) {
+		clearItems(state) {
 			state.items = [];
 		},
 	},
 	actions: {
 		fetchItems(context, name) {
 			context.commit("clearItems");
-			api.get(`find/all?username=`+name)
+			api.get(`api/v1/find/all?username=`+name)
 				.then((res) => {
 					context.commit("loadItems", res.data.list);
 				})

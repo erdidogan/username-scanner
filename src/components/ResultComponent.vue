@@ -1,34 +1,40 @@
 <template>
 
-  <div v-for="data in resultList" class="p-4">
-    <div
-        class="flex-col flex justify-center items-center transition duration-500 ease-in-out transform hover:-translate-y-1 select-none cursor-pointer"
-    >
-      <a
-          :href="data.registerUrl"
-          target="_blank"
-      >
-        <div class="flex-shrink-0">
-          <img :src="data.siteIconUrl" alt="icon" class="mx-auto object-cover rounded-full h-5 w-5"/>
+  <div class="bg-white rounded mt-4 shadow-lg">
+
+    <div class="gap-4 px-8 ">
+      <div class="container flex flex-col px-5 py-24 mx-auto lg:items-center" v-if="resultList.length === 0">
+        <img alt="img" class="h-12 w-12" src="../assets/icon.svg"/>
+        <div class="flex flex-col w-full mb-4 text-left lg:text-center">
+          <h3 class="mb-4 text-xl font-semibold tracking-tighter text-black sm:text-5xl title-font">
+            Username Scanner
+          </h3>
+          <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-2/3">This application
+            finds available usernames on popular websites. It searches more than 30 web sites and lists results.
+            It is an open source application. Please checkout <a href="https://github.com/erdidogan" target="_blank">
+              Github</a> username-scanner project for more information.
+          </p>
         </div>
-        <div class="mt-2 text-center flex flex-col">
-              <span class="text-gray-600 dark:text-white text-lg font-medium">
-                {{ data.siteName }}
-              </span>
-          <span
-              v-show="data.statusCode === 404"
-              class="text-xs text-green-600"
-          >
-                Available
-              </span>
-          <span
-              v-show="data.statusCode === 200"
-              class="text-xs text-yellow-600"
-          >
-                Taken
-              </span>
-        </div>
-      </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div v-for="data in resultList" class="shadow-lg rounded-2xl w-36 p-4 bg-white dark:bg-gray-800
+transition duration-400 ease-in-out transform hover:-translate-y-1">
+      <div class="flex flex-col mx-auto">
+        <a :href="data.registerUrl" target="_blank">
+          <img :src="data.siteIconUrl" alt="icon" class="mx-auto object-cover rounded-full h-8"/>
+          <p class="text-gray-800 text-md text-center dark:text-white font-bold my-4">
+            {{ data.siteName }}
+          </p>
+          <p class="text-md  text-center text-gray-800-700 ml-2">
+            {{ data.status }}
+          </p>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -43,27 +49,13 @@ export default {
       type: Array,
       default: [],
     },
-    search: {
-      type: Number,
-      default: [],
-    },
   },
   data() {
     return {};
   },
   computed: {
     resultList() {
-      if (this.search == 200) {
-        return this.results.filter((r) => {
-          return r.statusCode === 200;
-        });
-      } else if (this.search == 404) {
-        return this.results.filter((r) => {
-          return r.statusCode === 404;
-        });
-      } else {
-        return this.results;
-      }
+      return this.results;
     },
   },
 };
