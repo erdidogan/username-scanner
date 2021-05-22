@@ -62,9 +62,8 @@
                   Username Scanner
                 </h3>
                 <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-2/3">This application
-                  finds available usernames on popular websites. It searches more than 30 web sites and lists results.
-                  It is an open source application. Please checkout <a href="https://github.com/erdidogan"
-                                                                       target="_blank">
+                  finds available usernames on popular websites.It is an open source application.
+                  Please checkout <a href="https://github.com/erdidogan" target="_blank">
                     <b>Github</b></a> username-scanner project for more information.
                 </p>
               </div>
