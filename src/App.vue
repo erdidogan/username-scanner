@@ -17,11 +17,17 @@
             <div class="flex items-end justify-between">
               <input class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none
                             focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                     maxlength="10"
+                     maxlength="26"
                      v-model="username"
                      @keyup.enter="submitButton"
                      placeholder="Type a username.."
                      type="search"/>
+            </div>
+          </div>
+
+          <div class="flex flex-col px-8 pt-4" v-show="warning">
+            <div class="flex items-end">
+              <span class="font-bold">Length must be greater than 3!</span>
             </div>
           </div>
 
@@ -35,19 +41,15 @@
         </div>
 
         <div class="bg-white rounded mt-4 shadow-lg py-6">
-          <div class="px-8">
-            <div class="flex items-end">
-              <span class="font-semibold">Site Count</span>
 
-            </div>
-            <span class="text-xs text-gray-500 mt-2">Site Count Result </span>
-          </div>
-          <div v-show="isLoading" class="loader">Loading...</div>
+          <div v-show="isLoading" class="loader"></div>
           <div v-show="!isLoading" class="flex flex-col px-8 pt-4">
-            <p class="text-md text-gray-700 text-4xl text-center dark:text-gray-50 ml-2">
-              {{ items.length }}
+            <p class="text-md text-gray-700 text-xl text-center dark:text-gray-50 ml-2">
+              Site Count: {{ items.length }}
             </p>
           </div>
+
+
         </div>
       </div>
       <div class="lg:col-span-2">
@@ -74,7 +76,7 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div v-for="data in items" class="shadow-lg rounded-2xl w-36 p-4 bg-white dark:bg-gray-800
+          <div v-for="data in filteredItems" class="shadow-lg rounded-2xl w-36 p-4 bg-white dark:bg-gray-800
 transition duration-400 ease-in-out transform hover:-translate-y-1">
             <div class="flex flex-col mx-auto">
               <a :href="data.registerUrl" target="_blank">
@@ -107,29 +109,56 @@ transition duration-400 ease-in-out transform hover:-translate-y-1">
 export default {
   data() {
     return {
+      items: [],
       username: "",
       isLoading: false,
-      items: []
+      warning: false,
+      state: false,
     };
   },
   methods: {
     submitButton() {
-      if (this.username.length > 3)
+      if (this.username.length > 3) {
         this.isLoading = true;
-      fetch("https://username-scanner-core-reactive-43dd7.ondigitalocean.app/api/v1/find/all?username=" + this.username)
-          .then(response => response.json())
-          .then(data => (this.items = data.list));
-      setTimeout(() => this.isLoading = false, 2700);
-
+        this.state = true
+        fetch("https://username-scanner-core-reactive-43dd7.ondigitalocean.app/api/v1/find/all?username=" + this.username)
+            .then(response => response.json())
+            .then(data => (this.items = data.list));
+      }
     },
   },
 
   watch: {
     username: function (val) {
       this.username = val.replace(/[^a-zA-Z0-9-_.]/g, "");
+      this.warning = val.length >= 1 && val.length <= 3;
+
+    },
+    items: function (item) {
+      if (item.length > 0)
+        this.isLoading = false
     },
 
   },
+  computed: {
+    filteredItems() {
+      let itemList = this.items
+
+      // Sort by alphabetical order
+      itemList = itemList.sort((a, b) => {
+          let fa = a.status, fb = b.status
+          if (fa < fb) {
+            return -1
+          }
+          if (fa > fb) {
+            return 1
+          }
+          return 0
+
+      })
+      return itemList
+    }
+  }
 };
 </script>
 
