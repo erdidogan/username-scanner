@@ -123,7 +123,7 @@ export default {
         this.state = true
         fetch("https://username-scanner-core-reactive-43dd7.ondigitalocean.app/api/v1/find/all?username=" + this.username)
             .then(response => response.json())
-            .then(data => (this.items = data.list));
+            .then(data => (this.items = data.l));
       }
     },
   },
