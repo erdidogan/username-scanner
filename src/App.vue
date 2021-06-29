@@ -6,6 +6,9 @@
         <h2 class="text-sm font-medium">Search</h2>
         <div class="bg-white rounded mt-4 shadow-lg py-6">
           <div class="px-8">
+
+            <a class="github-button" href="https://github.com/erdidogan/username-scanner" data-icon="octicon-star"
+               data-size="large" aria-label="Star erdidogan/username-scanner on GitHub">Star</a>
             <div class="flex items-end">
               <span class="font-semibold">Username Scanner</span>
 
@@ -43,8 +46,8 @@
         <div class="bg-white rounded mt-4 shadow-lg py-6">
 
           <div v-show="isLoading" class="loader"></div>
-          <div v-show="!isLoading" class="flex flex-col px-8 pt-4">
-            <p class="text-md text-gray-700 text-xl text-center dark:text-gray-50 ml-2">
+          <div v-show="!isLoading" class="flex flex-col px-8">
+            <p class="text-md text-gray-700 text-xl text-center dark:text-gray-50">
               Site Count: {{ items.length }}
             </p>
           </div>
@@ -65,8 +68,6 @@
                 </h3>
                 <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-2/3">This application
                   finds available usernames on popular websites.It is an open source application.
-                  Please checkout <a href="https://github.com/erdidogan" target="_blank">
-                    <b>Github</b></a> username-scanner project for more information.
                 </p>
               </div>
 
@@ -146,14 +147,14 @@ export default {
 
       // Sort by alphabetical order
       itemList = itemList.sort((a, b) => {
-          let fa = a.status, fb = b.status
-          if (fa < fb) {
-            return -1
-          }
-          if (fa > fb) {
-            return 1
-          }
-          return 0
+        let fa = a.status, fb = b.status
+        if (fa < fb) {
+          return -1
+        }
+        if (fa > fb) {
+          return 1
+        }
+        return 0
 
       })
       return itemList
