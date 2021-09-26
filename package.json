@@ -27,14 +27,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.1.2"
+    "vue": "^3.2.19"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.4",
-    "@vue/compiler-sfc": "^3.1.2",
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4",
-    "vite": "^2.3.8"
+    "@vitejs/plugin-vue": "^1.9.2",
+    "@vue/compiler-sfc": "^3.2.19",
+    "autoprefixer": "^10.3.5",
+    "postcss": "^8.3.8",
+    "tailwindcss": "^2.2.15",
+    "vite": "^2.5.10"
   }
 }
