@@ -1,5 +1,5 @@
 # Username - Scanner
-![Image](./src/assets/img.png "App")
+
 
 Username - Scanner searches popular web sites to find out given username is available or not. 
 
